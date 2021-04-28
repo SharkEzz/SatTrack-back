@@ -1,0 +1,5 @@
+{
+    "secret": "secret",
+    "resetDB": true,
+    "port": 8080
+}

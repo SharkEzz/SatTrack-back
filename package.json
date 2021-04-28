@@ -5,14 +5,18 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --delay 500 server.js",
+    "start": "nodemon --delay 500ms -- --experimental-json-modules server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Tristan Didou",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.1",
     "express": "^4.17.1",
-    "sqlite3": "^5.0.2"
+    "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0",
+    "sqlite3": "^5.0.2",
+    "tle.js": "^4.2.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
