@@ -1,0 +1,7 @@
+{
+    "dialect": "sqlite",
+    "path": "./db.sqlite",
+    "force": true,
+    "loadFixtures": true,
+    "logging": false
+}
