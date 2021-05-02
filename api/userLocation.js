@@ -1,8 +1,9 @@
-const userLocation = (app, db) => {
+const userLocation = (app, db, setCurrentLocation) => {
 
     app.get('/api/user_location', (req, res) => {
         db.userlocation.findByPk(1).then((location) => {
-            res.json(location)
+            setCurrentLocation(location);
+            res.json(location);
         });
     });
 
