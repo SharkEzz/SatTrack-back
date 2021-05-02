@@ -14,10 +14,12 @@
     "body-parser": "^1.19.0",
     "chalk": "^4.1.1",
     "express": "^4.17.1",
+    "node-cron": "^3.0.0",
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0",
     "sqlite3": "^5.0.2",
-    "tle.js": "^4.2.11"
+    "tle.js": "^4.2.11",
+    "ws": "^7.4.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

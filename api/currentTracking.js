@@ -1,6 +1,6 @@
-import { getInfos, isVisible, getVisibles } from '../utils/satelliteUtils.js';
+import { getInfos } from '../utils/satelliteUtils.js';
 
-const currentTracking = (app, db) => {
+const currentTracking = (app, db, setCurrentTracking) => {
 
     app.get('/api/current_tracking', (req, res) => {
         db.userlocation.findByPk(1).then((location) => {
@@ -13,8 +13,9 @@ const currentTracking = (app, db) => {
                 }
             }).then((tracking) => {
                 const sat = tracking.satellite;
-                if(!sat) res.json({satellite: null});
-                else res.json({satellite: {id: sat.id, ...getInfos(sat.tle, location)}});
+                let currentTracking = sat ? {satellite: {id: sat.id, ...getInfos(sat.tle, location)}} : {satellite: null};
+                setCurrentTracking(sat)
+                res.json(currentTracking ?? null);
             })
         });
     });
