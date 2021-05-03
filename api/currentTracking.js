@@ -1,3 +1,5 @@
+import { isSatelliteVisible } from '../libs/satelliteUtils.js';
+
 /**
  * @param {import("express").Express} app 
  * @param {import("sequelize").Sequelize} db 
@@ -21,13 +23,24 @@ const currentTracking = (app, db) => {
             return;
         }
 
-        const currentTracking = await db.models.CurrentTracking.findByPk(1);        
-        
-        const updatedTracking = await currentTracking.update({
-            satelliteId
-        });
+        const currentTracking = await db.models.CurrentTracking.findByPk(1);
+        const location = await db.models.Location.findByPk(1);
 
-        res.send(updatedTracking);
+        if((location.latitude && location.longitude && location.altitude) && isSatelliteVisible(satellite.tle, location))
+        {
+            const updatedTracking = await currentTracking.update({
+                satelliteId
+            });
+            res.send(updatedTracking);
+        }
+        else
+        {
+            res.status(403).send({
+                error: 'Satellite is not visible'
+            });
+        }
+        
+
     });
 
     app.delete('/api/current_tracking', async (_, res) => {

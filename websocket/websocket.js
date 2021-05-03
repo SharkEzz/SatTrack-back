@@ -24,11 +24,19 @@ export default (server, db, refreshIntervalSeconds) => {
         const location = await db.models.Location.findByPk(1);
         const satellites = await db.models.Satellite.findAll();
 
+        if(!(trackedSatellite.satelliteId && isSatelliteVisible(trackedSatellite.Satellite.tle, location)))
+            await trackedSatellite.update({
+                satelliteId: null
+            });
+
         return {
             satellites: satellites.map(satellite => ({
                 id: satellite.id,
                 name: getSatelliteName(satellite.tle),
-                isVisible: isSatelliteVisible(satellite.tle, location)
+                tle: satellite.tle,
+                visible: isSatelliteVisible(satellite.tle, location),
+                createdAt: satellite.createdAt,
+                updatedAt: satellite.updatedAt
             })),
             trackedSatellite: trackedSatellite.satelliteId && getSatInfos(trackedSatellite.Satellite.tle, location),
             location: locationItemNormalizer(location)
