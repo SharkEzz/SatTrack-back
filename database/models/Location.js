@@ -13,15 +13,12 @@ export default (sequelize, dataTypes) => {
         },
         latitude: {
             type: dataTypes.FLOAT,
-            allowNull: false
         },
         longitude: {
             type: dataTypes.FLOAT,
-            allowNull: false
         },
         altitude: {
             type: dataTypes.FLOAT.UNSIGNED,
-            allowNull: false
         }
     }, {
         timestamps: false
