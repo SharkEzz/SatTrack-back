@@ -32,7 +32,12 @@
             altitude: null
         });
 
-        // TODO: stop tracking when location is deleted
+        // Remove the currently tracked satellite if there is one
+        const currentTracked = await db.models.CurrentTracking.findByPk(1);
+        if(currentTracked.satelliteId)
+            await currentTracked.update({
+                satelliteId: null
+            });
 
         res.send(updatedLocation);
     })

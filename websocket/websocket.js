@@ -1,6 +1,5 @@
 import url from 'whatwg-url';
 import WebSocket from 'ws';
-import { collectionNormalizer as satelliteCollectionNormalizer } from '../database/normalizers/satelliteNormalizer.js';
 import { itemNormalizer as locationItemNormalizer } from '../database/normalizers/locationNormalizer.js';
 import { getSatInfos, isSatelliteVisible } from '../libs/satelliteUtils.js';
 import { getSatelliteName } from 'tle.js/dist/tlejs.esm.js';
@@ -46,10 +45,10 @@ export default (server, db, refreshIntervalSeconds) => {
             }, refreshIntervalSeconds * 1000);
         }
 
-        ws.on('close', () => wss.emit('disconnect', ws));
+        ws.on('close', () => wss.emit('disconnect'));
     });
 
-    wss.on('disconnect', (ws) => {
+    wss.on('disconnect', () => {
         // Clear the interval when there is no more connected clients
         if(wss.clients.size === 0)
         {

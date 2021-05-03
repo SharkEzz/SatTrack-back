@@ -9,7 +9,7 @@ export const itemNormalizer = (location) => {
         }
     }
     else
-        return {}
+        return null;
 
     
 };

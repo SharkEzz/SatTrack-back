@@ -58,7 +58,11 @@ const satellites = (app, db) => {
         }
         await satellite.destroy();
 
-        // TODO: check if current tracking sat is the deleted sat
+        const currentTracking = await db.models.CurrentTracking.findByPk(1);
+        if(currentTracking.satelliteId)
+            await currentTracking.update({
+                satelliteId: null
+            });
 
         res.send({success: 'Satellite deleted'});
     });
