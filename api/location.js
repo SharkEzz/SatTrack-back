@@ -32,6 +32,8 @@
             altitude: null
         });
 
+        // TODO: stop tracking when location is deleted
+
         res.send(updatedLocation);
     })
 };
