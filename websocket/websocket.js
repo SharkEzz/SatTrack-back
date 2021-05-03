@@ -49,7 +49,7 @@ export default (server, db, refreshIntervalSeconds) => {
         {
             refreshInterval = new setInterval(async () => {
                 const payload = await computeData();
-                ws.send(JSON.stringify(payload));
+                wss.clients.forEach(client => client.send(JSON.stringify(payload)));
             }, refreshIntervalSeconds * 1000);
         }
 
